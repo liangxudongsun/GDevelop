@@ -164,9 +164,16 @@ namespace gdjs {
       if (initialInstanceData.customSize) {
         this.setWidth(initialInstanceData.width);
         this.setHeight(initialInstanceData.height);
+      } else {
+        // The custom size may have been removed (for example, by an undo in
+        // the in-game editor), so restore the original size.
+        this.setWidth(this.getOriginalWidth());
+        this.setHeight(this.getOriginalHeight());
       }
       if (initialInstanceData.depth !== undefined) {
         this.setDepth(initialInstanceData.depth);
+      } else {
+        this.setDepth(this.getOriginalDepth());
       }
       this.flipX(!!initialInstanceData.flippedX);
       this.flipY(!!initialInstanceData.flippedY);
